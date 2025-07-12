@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>Add New Reminder</h2>
+    <form action = "Addreminder" method="post">
+        <input type="text" name="title" placeholder="Reminder Title" required>
+        <textarea name="description" placeholder="Reminder Description" rows="4" required></textarea>
+        <input type="datetime-local" name="date" required>
+        <button type="submit">Save Reminder</button>
+    </form>
+</div>
+</body>
+</html>
