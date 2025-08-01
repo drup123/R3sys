@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farmer Dashboard | Marketp</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #2e7d32;
+      padding-top: 20px;
+      color: white;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      background: none;
+      color: white;
+      text-align: left;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar button:hover,
+    .sidebar button.active {
+      background-color: #256326;
+    }
+
+    .logout-btn {
+      background-color: #c0392b !important;
+      margin-top: 20px;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .card.active {
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button.submit-btn {
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button.submit-btn:hover {
+      background-color: #1b5e20;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2e7d32;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Farmer Panel</h2>
+    <button onclick="showSection('post')">Post Product</button>
+    <button onclick="showSection('orders')">View Orders</button>
+    <button onclick="showSection('password')">Change Password</button>
+    <button class="logout-btn" onclick="location.href='index.html'">Logout</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Post Product Section -->
+    <div id="post" class="card active">
+      <h3>Post Product for Sale</h3>
+      <form action="/postProduct" method="POST">
+        <input type="text" name="productName" placeholder="Product Name" required>
+        <input type="number" name="quantity" placeholder="Quantity (e.g. 100)" required>
+        <input type="number" name="price" placeholder="Price per unit (₹)" required>
+        <button type="submit" class="submit-btn">Post Product</button>
+      </form>
+    </div>
+
+    <!-- Orders Section -->
+    <div id="orders" class="card">
+      <h3>Orders Received</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Buyer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Order Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Replace with dynamic backend data -->
+          <tr>
+            <td>501</td>
+            <td>Akash Mehta</td>
+            <td>Wheat</td>
+            <td>50</td>
+            <td>2025-07-14</td>
+          </tr>
+          <tr>
+            <td>502</td>
+            <td>Priya Desai</td>
+            <td>Tomatoes</td>
+            <td>80</td>
+            <td>2025-07-13</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Change Password Section -->
+    <div id="password" class="card">
+      <h3>Change Password</h3>
+      <form action="/changePassword" method="POST">
+        <input type="password" name="oldPassword" placeholder="Old Password" required>
+        <input type="password" name="newPassword" placeholder="New Password" required>
+        <button type="submit" class="submit-btn">Update Password</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+      // Show selected
+      document.getElementById(sectionId).classList.add('active');
+      // Handle active sidebar buttons
+      document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

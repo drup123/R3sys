@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | Marketp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2f80ed;
+      --primary-dark: #1c5bbf;
+      --primary-light: #56ccf2;
+      --danger: #e74c3c;
+      --danger-dark: #c0392b;
+      --text-dark: #2c3e50;
+      --text-light: #ecf0f1;
+      --sidebar-width: 250px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: white;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem 0;
+      position: fixed;
+      height: 100%;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 0 1.5rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+
+    .nav-menu {
+      list-style: none;
+    }
+
+    .nav-item {
+      margin-bottom: 5px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      color: #7f8c8d;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-link i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background-color: rgba(47, 128, 237, 0.1);
+      border-left: 3px solid var(--primary);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .page-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .logout-btn {
+      background-color: var(--danger);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .logout-btn:hover {
+      background-color: var(--danger-dark);
+      transform: translateY(-2px);
+    }
+
+    .logout-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Dashboard Content */
+    .dashboard {
+      padding: 2rem;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(47, 128, 237, 0.3);
+    }
+
+    .welcome-banner h2 {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-banner p {
+      opacity: 0.9;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.2rem;
+      background: rgba(47, 128, 237, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0.6rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .card-btn:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(47, 128, 237, 0.3);
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        width: 80px;
+        overflow: hidden;
+      }
+      
+      .brand-name, .nav-link span {
+        display: none;
+      }
+      
+      .nav-link {
+        justify-content: center;
+      }
+      
+      .main-content {
+        margin-left: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">
+        <i class="fas fa-leaf"></i>
+      </div>
+      <span class="brand-name">Marketp</span>
+    </div>
+    
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="#" class="nav-link active">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="admin_farmers.jsp" class="nav-link">
+          <i class="fas fa-users"></i>
+          <span>Farmers</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="admin_buyers.jsp" class="nav-link">
+          <i class="fas fa-shopping-basket"></i>
+          <span>Buyers</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="admin_products.jsp" class="nav-link">
+          <i class="fas fa-apple-alt"></i>
+          <span>Products</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <h1 class="page-title">Admin Dashboard</h1>
+      <button class="logout-btn" onclick="location.href='index.html'">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <div class="welcome-banner">
+        <h2>Welcome Back, Admin!</h2>
+        <p>Manage your farmers, buyers, and products from this dashboard.</p>
+      </div>
+
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="card-title">Manage Farmers</h3>
+          <a href="admin_farmers.jsp" class="card-btn">
+            <i class="fas fa-arrow-right"></i> Access
+          </a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-shopping-basket"></i>
+          </div>
+          <h3 class="card-title">View Buyers</h3>
+          <a href="admin_buyers.jsp" class="card-btn">
+            <i class="fas fa-arrow-right"></i> Access
+          </a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <h3 class="card-title">Manage Products</h3>
+          <a href="admin_products.jsp" class="card-btn">
+            <i class="fas fa-arrow-right"></i> Access
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

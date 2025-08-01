@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Login | Marketp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0073e6;
+      --primary-dark: #005bb5;
+      --secondary-color: #00c9a7;
+      --text-color: #2c3e50;
+      --light-gray: #f5f7fa;
+      --white: #ffffff;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 115, 230, 0.85), rgba(0, 201, 167, 0.85));
+      z-index: -1;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: var(--box-shadow);
+      width: 100%;
+      max-width: 400px;
+      margin: 20px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--text-color);
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--secondary-color);
+      border-radius: 3px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: #777;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      transition: var(--transition);
+      background-color: rgba(245, 247, 250, 0.7);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.2);
+      background-color: var(--white);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0, 115, 230, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 115, 230, 0.4);
+    }
+
+    .forgot-link {
+      display: block;
+      text-align: right;
+      margin-top: 10px;
+      color: #666;
+      font-size: 14px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .forgot-link:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .register-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: var(--text-color);
+      font-size: 14px;
+    }
+
+    .register-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 30px 20px;
+        margin: 15px;
+      }
+      
+      h2 {
+        font-size: 24px;
+      }
+      
+      input {
+        padding: 12px 15px 12px 35px;
+      }
+      
+      .form-group i {
+        left: 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Buyer Login</h2>
+    <form action="_05_Buyer_Login" method="POST">
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+      <button type="submit">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </form>
+    <div class="register-link">
+      Don't have an account? <a href="buyer_registration.html">Register here</a>
+    </div>
+  </div>
+</body>
+</html>
